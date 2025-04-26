@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container, Title, Desc, BackLink } from "../../styles/BlogStyles";
+import Head from "next/head";
 
 // Fetch a single blog by ID (SSR)
 export async function getServerSideProps({ params }) {
@@ -22,16 +23,39 @@ export default function BlogDetail({ blog }) {
       </Container>
     );
   }
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": blog.title,
+    "description": blog.desc || blog.description,
+    "url": `https://yourdomain.com/blogs/${blog.id}`,
+    "articleBody": blog.content,
+  };
+
   return (
-    <Container>
-      <Title>{blog.title}</Title>
-      <Desc>{blog.desc || blog.description}</Desc>
-      <div style={{ margin: "2rem 0" }}>
-        <p>{blog.content}</p>
-      </div>
-      <Link href="/blogs" legacyBehavior>
-        <BackLink>← Back to Blogs</BackLink>
-      </Link>
-    </Container>
+    <>
+      <Head>
+        <title>{blog.title} | Travmigoz Blog</title>
+        <meta name="description" content={blog.desc || blog.description} />
+        <meta property="og:title" content={blog.title} />
+        <meta property="og:description" content={blog.desc || blog.description} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://yourdomain.com/blogs/${blog.id}`} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </Head>
+      <Container>
+        <Title>{blog.title}</Title>
+        <Desc>{blog.desc || blog.description}</Desc>
+        <div style={{ margin: "2rem 0" }}>
+          <p>{blog.content}</p>
+        </div>
+        <Link href="/blogs" legacyBehavior>
+          <BackLink>← Back to Blogs</BackLink>
+        </Link>
+      </Container>
+    </>
   );
 }

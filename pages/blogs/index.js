@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Head from "next/head";
 import {
   Container,
   BlogList,
@@ -18,23 +19,50 @@ export async function getServerSideProps() {
 
 // Blog list page
 export default function BlogsPage({ blogs }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "All Blogs",
+    "url": "https://yourdomain.com/blogs",
+    "blogPost": blogs?.map((blog) => ({
+      "@type": "BlogPosting",
+      "headline": blog.title,
+      "description": blog.desc || blog.description || "",
+      "url": `https://yourdomain.com/blogs/${blog.id}`,
+    })),
+  };
+
   return (
-    <Container>
-      <h1>All Blogs</h1>
-      <BlogList>
-        {blogs && blogs.length > 0 ? (
-          blogs.map((blog) => (
-            <BlogItem key={blog.id}>
-              <Link href={`/blogs/${blog.id}`} legacyBehavior>
-                <BlogLink>{blog.title}</BlogLink>
-              </Link>
-              <BlogDesc>{blog.desc || blog.description || ""}</BlogDesc>
-            </BlogItem>
-          ))
-        ) : (
-          <BlogItem>No blogs found.</BlogItem>
-        )}
-      </BlogList>
-    </Container>
+    <>
+      <Head>
+        <title>All Blogs | Travmigoz Blog</title>
+        <meta name="description" content="Browse all blog posts on Travmigoz Blog." />
+        <meta property="og:title" content="All Blogs | Travmigoz Blog" />
+        <meta property="og:description" content="Browse all blog posts on Travmigoz Blog." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://yourdomain.com/blogs" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </Head>
+      <Container>
+        <h1>All Blogs</h1>
+        <BlogList>
+          {blogs && blogs.length > 0 ? (
+            blogs.map((blog) => (
+              <BlogItem key={blog.id}>
+                <Link href={`/blogs/${blog.id}`} legacyBehavior>
+                  <BlogLink>{blog.title}</BlogLink>
+                </Link>
+                <BlogDesc>{blog.desc || blog.description || ""}</BlogDesc>
+              </BlogItem>
+            ))
+          ) : (
+            <BlogItem>No blogs found.</BlogItem>
+          )}
+        </BlogList>
+      </Container>
+    </>
   );
 }
