@@ -26,21 +26,27 @@ export default function BlogDetail({ blog }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "headline": blog.title,
-    "description": blog.desc || blog.description,
-    "url": `https://yourdomain.com/blogs/${blog.id}`,
-    "articleBody": blog.content,
+    headline: blog.title,
+    description: blog.desc || blog.description,
+    url: `https://yourdomain.com/blogs/${blog.id}`,
+    articleBody: blog.content,
   };
 
   return (
     <>
       <Head>
-        <title>{blog.title} | Travmigoz Blog</title>
+        <title>{blog.title} | Akshat Blog</title>
         <meta name="description" content={blog.desc || blog.description} />
         <meta property="og:title" content={blog.title} />
-        <meta property="og:description" content={blog.desc || blog.description} />
+        <meta
+          property="og:description"
+          content={blog.desc || blog.description}
+        />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content={`https://yourdomain.com/blogs/${blog.id}`} />
+        <meta
+          property="og:url"
+          content={`https://yourdomain.com/blogs/${blog.id}`}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

@@ -22,23 +22,29 @@ export default function BlogsPage({ blogs }) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "name": "All Blogs",
-    "url": "https://yourdomain.com/blogs",
-    "blogPost": blogs?.map((blog) => ({
+    name: "All Blogs",
+    url: "https://yourdomain.com/blogs",
+    blogPost: blogs?.map((blog) => ({
       "@type": "BlogPosting",
-      "headline": blog.title,
-      "description": blog.desc || blog.description || "",
-      "url": `https://yourdomain.com/blogs/${blog.id}`,
+      headline: blog.title,
+      description: blog.desc || blog.description || "",
+      url: `https://yourdomain.com/blogs/${blog.id}`,
     })),
   };
 
   return (
     <>
       <Head>
-        <title>All Blogs | Travmigoz Blog</title>
-        <meta name="description" content="Browse all blog posts on Travmigoz Blog." />
-        <meta property="og:title" content="All Blogs | Travmigoz Blog" />
-        <meta property="og:description" content="Browse all blog posts on Travmigoz Blog." />
+        <title>All Blogs | Akshat Blog</title>
+        <meta
+          name="description"
+          content="Browse all blog posts on Akshat Blog."
+        />
+        <meta property="og:title" content="All Blogs | Akshat Blog" />
+        <meta
+          property="og:description"
+          content="Browse all blog posts on Akshat Blog."
+        />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://yourdomain.com/blogs" />
         <script

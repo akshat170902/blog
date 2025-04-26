@@ -13,7 +13,7 @@ export default function BlogHome() {
   return (
     <>
       <Head>
-        <title>Travmigoz Blog</title>
+        <title>Akshat Blog</title>
       </Head>
       <div
         style={{
@@ -24,9 +24,7 @@ export default function BlogHome() {
         }}
       >
         <header style={{ marginBottom: "2rem", textAlign: "center" }}>
-          <h1 style={{ fontSize: "2.5rem", fontWeight: 700 }}>
-            Travmigoz Blog
-          </h1>
+          <h1 style={{ fontSize: "2.5rem", fontWeight: 700 }}>Akshat Blog</h1>
           <p style={{ color: "#666", fontSize: "1.2rem" }}>
             Discover stories, guides, and travel inspiration.
           </p>
@@ -69,7 +67,7 @@ export default function BlogHome() {
         <footer
           style={{ marginTop: "3rem", textAlign: "center", color: "#aaa" }}
         >
-          &copy; {new Date().getFullYear()} Travmigoz Blog
+          &copy; {new Date().getFullYear()} Akshat Blog
         </footer>
       </div>
     </>
