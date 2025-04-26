@@ -1,8 +1,7 @@
 import Head from "next/head";
 import { useSelector, useDispatch } from "react-redux";
-import { useRouter } from "next/router";
 import { increment } from "../store";
-import routerUtils from "../router";
+import Link from "next/link";
 
 // This page is rendered on the server by default in Next.js (SSR).
 // If you add getServerSideProps, you can fetch data at request time.
@@ -10,7 +9,6 @@ import routerUtils from "../router";
 export default function BlogHome() {
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
-  const router = useRouter();
 
   return (
     <>
@@ -63,9 +61,9 @@ export default function BlogHome() {
           </div>
           {/* Router example */}
           <div style={{ marginTop: "1rem", textAlign: "center" }}>
-            <button onClick={() => routerUtils.goToAbout(router)}>
-              Go to About Page
-            </button>
+            <Link href={`/blogs`} legacyBehavior>
+              Go to blog Page
+            </Link>
           </div>
         </main>
         <footer
