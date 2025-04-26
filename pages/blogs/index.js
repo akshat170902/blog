@@ -1,4 +1,11 @@
 import Link from "next/link";
+import {
+  Container,
+  BlogList,
+  BlogItem,
+  BlogLink,
+  BlogDesc,
+} from "../../styles/BlogsListStyles";
 
 // Fetch all blogs from the API on each request (SSR)
 export async function getServerSideProps() {
@@ -12,39 +19,22 @@ export async function getServerSideProps() {
 // Blog list page
 export default function BlogsPage({ blogs }) {
   return (
-    <div style={{ maxWidth: 800, margin: "0 auto", padding: "2rem" }}>
+    <Container>
       <h1>All Blogs</h1>
-      <ul style={{ listStyle: "none", padding: 0 }}>
+      <BlogList>
         {blogs && blogs.length > 0 ? (
           blogs.map((blog) => (
-            <li
-              key={blog.id}
-              style={{
-                marginBottom: "1.5rem",
-                borderBottom: "1px solid #eee",
-                paddingBottom: "1rem",
-              }}
-            >
+            <BlogItem key={blog.id}>
               <Link href={`/blogs/${blog.id}`} legacyBehavior>
-                <a
-                  style={{
-                    fontSize: "1.2rem",
-                    fontWeight: 600,
-                    color: "#0070f3",
-                  }}
-                >
-                  {blog.title}
-                </a>
+                <BlogLink>{blog.title}</BlogLink>
               </Link>
-              <p style={{ color: "#666" }}>
-                {blog.desc || blog.description || ""}
-              </p>
-            </li>
+              <BlogDesc>{blog.desc || blog.description || ""}</BlogDesc>
+            </BlogItem>
           ))
         ) : (
-          <li>No blogs found.</li>
+          <BlogItem>No blogs found.</BlogItem>
         )}
-      </ul>
-    </div>
+      </BlogList>
+    </Container>
   );
 }

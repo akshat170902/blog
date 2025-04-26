@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Container, Title, Desc, BackLink } from "../../styles/BlogStyles";
 
 // Fetch a single blog by ID (SSR)
 export async function getServerSideProps({ params }) {
@@ -13,24 +14,24 @@ export async function getServerSideProps({ params }) {
 export default function BlogDetail({ blog }) {
   if (!blog || !blog.id) {
     return (
-      <div style={{ maxWidth: 800, margin: "0 auto", padding: "2rem" }}>
+      <Container>
         <p>Blog not found.</p>
         <Link href="/blogs" legacyBehavior>
-          <a>Back to Blogs</a>
+          <BackLink>Back to Blogs</BackLink>
         </Link>
-      </div>
+      </Container>
     );
   }
   return (
-    <div style={{ maxWidth: 800, margin: "0 auto", padding: "2rem" }}>
-      <h1>{blog.title}</h1>
-      <p style={{ color: "#666" }}>{blog.desc || blog.description}</p>
+    <Container>
+      <Title>{blog.title}</Title>
+      <Desc>{blog.desc || blog.description}</Desc>
       <div style={{ margin: "2rem 0" }}>
         <p>{blog.content}</p>
       </div>
       <Link href="/blogs" legacyBehavior>
-        <a>← Back to Blogs</a>
+        <BackLink>← Back to Blogs</BackLink>
       </Link>
-    </div>
+    </Container>
   );
 }
