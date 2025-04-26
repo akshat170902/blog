@@ -1,7 +1,13 @@
-// This file provides router utility functions for navigation.
+// Navigation helpers for Next.js
 const routerUtils = {
-  goToAbout(router) {
-    router.push("/about");
+  goTo(router, path) {
+    router.push(path);
+  },
+  goToBlogs(router) {
+    router.push("/blogs");
+  },
+  goToBlogDetail(router, id) {
+    router.push(`/blogs/${id}`);
   },
 };
 
