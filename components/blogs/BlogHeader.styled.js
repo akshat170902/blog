@@ -102,3 +102,15 @@ export const Tab = styled(Link)`
     margin-left: -1rem;
   }
 `;
+
+export const HeaderScrollWrapper = styled.div`
+  position: relative;
+  overflow: hidden;
+  height: 95vh;
+  transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.scroll-animate {
+    height: 0vh;
+    transition: height 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+`;
