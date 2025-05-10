@@ -5,13 +5,29 @@ export const CardMeta = styled.div`
   opacity: 0;
   max-height: 0;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
   transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: opacity, max-height;
+  
+  padding: 3%;
+  flex-direction: row;
+  gap: 0.5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.7) 100%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+`;
+export const CardContentBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  align-items: flex-start;
+  justify-content: flex-start;
 `;
 export const BlogCardBox = styled.div`
   position: relative;
@@ -58,11 +74,7 @@ export const BlogCardBox = styled.div`
 export const CardOverlay = styled.div`
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.3) 40%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
+
   z-index: 1;
   animation: fadeInOverlay 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   @keyframes fadeInOverlay {
@@ -78,7 +90,7 @@ export const CardOverlay = styled.div`
 export const CardContent = styled.div`
   position: relative;
   z-index: 2;
-  padding: 1.5rem;
+  
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -95,13 +107,13 @@ export const CardContent = styled.div`
 
 export const CardCategory = styled.div`
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
+  top: 0rem;
+  left: 0rem;
   background: rgba(0, 0, 0, 0.3);
-  border-radius: 16px 0 0 0;
-  padding: 12px 16px;
-  font-size: 1.6rem;
-  font-weight: 700;
+  border-radius: 16px 0 16px 0;
+  padding: 3% 4%;
+  font-size: 1.4rem;
+  font-weight: 600;
   font-family: "Montserrat", sans-serif;
   color: #fff;
   text-shadow: 0px 1px 7.7px rgba(0, 0, 0, 0.6);
@@ -139,11 +151,9 @@ export const CardCTA = styled(Link)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 8px 32px;
-  gap: 8px;
+  padding: 2% 5%;
+  gap: 2%;
   margin-top: 0.5rem;
-  width: 118px;
-  height: 46px;
   border: 1px solid #fafafa;
   border-radius: 40px;
   font-family: "Montserrat", sans-serif;
