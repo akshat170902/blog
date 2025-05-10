@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   BlogCardBox,
   CardOverlay,
@@ -8,24 +7,25 @@ import {
   CardAuthor,
   CardDesc,
   CardCTA,
+  CardMeta,
 } from "./BlogCard.styled";
 
 export default function BlogCard({ blog, image }) {
   return (
     <BlogCardBox image={image}>
       <CardOverlay />
-      <CardCategory>
-        {blog.category || "How I Plan My Trips"}
-      </CardCategory>
+      <CardCategory>{blog.title}</CardCategory>
       <CardContent>
-        <CardTitle>{blog.title}</CardTitle>
-        <CardAuthor>By {blog.author || "Bhawna Sharma"}</CardAuthor>
-        <CardDesc>
-          {blog.desc ||
-            blog.description ||
-            "A slow journey through Himachal’s tea stalls and trails."}
-        </CardDesc>
-        <CardCTA href={`/blogs/${blog.id}`}>Read More</CardCTA>
+        <CardMeta>
+          <CardTitle>{blog.title}</CardTitle>
+          <CardAuthor>By {blog.author || "Bhawna Sharma"}</CardAuthor>
+          <CardDesc>
+            {blog.desc ||
+              blog.description ||
+              "A slow journey through Himachal’s tea stalls and trails."}
+          </CardDesc>
+          <CardCTA href={`/blogs/${blog.id}`}>Read More</CardCTA>
+        </CardMeta>
       </CardContent>
     </BlogCardBox>
   );

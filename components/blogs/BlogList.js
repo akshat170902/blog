@@ -20,7 +20,11 @@ export default function BlogList({ blogs }) {
       <BlogGrid>
         {blogs && blogs.length > 0 ? (
           blogs.map((blog, idx) => (
-            <BlogCard key={blog.id} blog={blog} image={getCardImage(blog, idx)} />
+            <BlogCard
+              key={blog.id}
+              blog={blog}
+              image={getCardImage(blog, idx)}
+            />
           ))
         ) : (
           <div>No blogs found.</div>

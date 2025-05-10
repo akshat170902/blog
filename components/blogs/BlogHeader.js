@@ -1,4 +1,3 @@
-
 import {
   HeroSection,
   HeroOverlay,
@@ -25,7 +24,8 @@ export default function BlogHeader({ activeCategory }) {
         <HeroContent>
           <HeroTitle>Akshat Blogs</HeroTitle>
           <HeroSubtitle>
-            The best part of traveling isn’t the destination, it’s the people you meet along the way.
+            The best part of traveling isn’t the destination, it’s the people
+            you meet along the way.
           </HeroSubtitle>
         </HeroContent>
       </HeroSection>
