@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const MainSection = styled.section`
   background: #fff;
+  background-color: #fff;
+  opacity: 1;
   border-radius: 48px 48px 0 0;
   padding: 2rem 2rem 2rem 2rem;
   min-height: 60vh;

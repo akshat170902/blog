@@ -3,10 +3,8 @@ import Link from "next/link";
 
 export const HeroSection = styled.section`
   position: relative;
-  width: 100vw;
-  min-height: 400px;
-  height: 50vw;
-  max-height: 900px;
+
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,7 +73,10 @@ export const CategoryTabs = styled.div`
   background: #fff;
   border-radius: 48px 48px 0 0;
   margin-top: -48px;
-  padding-top: 2rem;
+  padding-top: 5%;
+
+  position: relative;
+  z-index: 2;
   @media (max-width: 900px) {
     border-radius: 24px 24px 0 0;
     padding-top: 1rem;
@@ -89,7 +90,7 @@ export const Tab = styled(Link)`
   font-weight: 700;
   padding: 1rem 2.5rem;
   border: none;
-  border-radius: 40px 40px 0 0;
+  border-radius: 40px;
   background: ${({ $active }) => ($active ? "#8DD3BB" : "#000")};
   color: ${({ $active }) => ($active ? "#000" : "#8DD3BB")};
   cursor: pointer;

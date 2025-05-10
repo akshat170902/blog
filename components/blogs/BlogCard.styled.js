@@ -31,8 +31,8 @@ export const CardContentBox = styled.div`
 `;
 export const BlogCardBox = styled.div`
   position: relative;
-  width: 420px;
-  height: 315px;
+  width:30%;
+  aspect-ratio: 4/3;
   border-radius: 24px;
   background: ${({ image }) => `url(${image}) center/cover no-repeat`};
   overflow: hidden;
