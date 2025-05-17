@@ -7,6 +7,7 @@ export const MainSection = styled.section`
   border-radius: 48px 48px 0 0;
   padding: 2rem 2rem 2rem 2rem;
   min-height: 60vh;
+
   @media (max-width: 900px) {
     border-radius: 24px 24px 0 0;
     padding: 1rem 0.5rem 1rem 0.5rem;
@@ -18,6 +19,7 @@ export const BlogGrid = styled.div`
   flex-wrap: wrap;
   gap: 2rem;
   justify-content: center;
+  
   @media (max-width: 1200px) {
     gap: 1rem;
   }

@@ -20,6 +20,7 @@ export default function BlogList({ blogs }) {
       <BlogGrid>
         {blogs && blogs.length > 0 ? (
           blogs.map((blog, idx) => (
+            
             <BlogCard
               key={blog.id}
               blog={blog}

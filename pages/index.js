@@ -11,6 +11,7 @@ export default function BlogHome() {
   const dispatch = useDispatch();
 
   return (
+    
     <>
       <Head>
         <title>Akshat Blog</title>

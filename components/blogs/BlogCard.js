@@ -21,6 +21,7 @@ export default function BlogCard({ blog, image }) {
             <CardAuthor>By {blog.author || "Bhawna Sharma"}</CardAuthor>
             <CardDesc>
               {blog.desc ||
+              
                 blog.description ||
                 "A slow journey through Himachal’s tea stalls and trails."}
             </CardDesc>

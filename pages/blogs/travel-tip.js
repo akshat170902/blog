@@ -6,6 +6,7 @@ export async function getServerSideProps() {
   const res = await fetch(
     "https://680cbd742ea307e081d4e50f.mockapi.io/blogs/getBlogById"
   );
+  
   const blogs = await res.json();
   const filtered = blogs.filter(
     (b) => (b.category || "").toLowerCase() === "travel tip"

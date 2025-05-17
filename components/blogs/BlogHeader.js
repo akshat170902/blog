@@ -13,6 +13,7 @@ import { useRef, useEffect } from "react";
 
 const categories = [
   { key: "general", label: "General", href: "/blogs/general" },
+  
   { key: "travel-tip", label: "Travel Tip", href: "/blogs/travel-tip" },
   { key: "travel-guide", label: "Travel Guide", href: "/blogs/travel-guide" },
 ];
