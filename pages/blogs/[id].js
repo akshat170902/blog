@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import BlogHero from "../../components/blogs/BlogHero";
+import BlogCard from "../../components/blogs/BlogCard";
 import {
   BlogMainSection,
   BlogMainWrapper,
@@ -8,9 +9,8 @@ import {
   BlogContentBody,
   BlogSidebar,
   BlogSidebarTitle,
-  BlogSidebarCard,
-  BlogSidebarCardInfo,
 } from "../../components/blogs/BlogPage.styled";
+import Divider from "../../components/blogs/Divider";
 
 export async function getServerSideProps({ params }) {
   const res = await fetch(
@@ -22,6 +22,33 @@ export async function getServerSideProps({ params }) {
 
 export default function BlogPage({ blog }) {
   const router = useRouter();
+
+  const popularBlogs = [
+    {
+      id: "popular-1",
+      title: "Travel Tips - How I Plan My Trips",
+      author: "Bhawna Sharma",
+      desc: "A slow journey through Himachal’s tea stalls and trails.",
+      image:
+        "/woman-hand-holding-camera-standing-top-rock-nature-travel-concept.jpg",
+    },
+    {
+      id: "popular-2",
+      title: "Boatman Punting in Kyoto",
+      author: "Akshat",
+      desc: "Experience the autumn season along the river in Kyoto, Japan.",
+      image:
+        "/boatman-punting-boat-river-arashiyama-autumn-season-along-river-kyoto-japan.jpg",
+    },
+    {
+      id: "popular-3",
+      title: "Viewpoint at Koh Nangyuan",
+      author: "Bhawna Sharma",
+      desc: "Beautiful girl standing at the viewpoint, Koh Nangyuan Island.",
+      image:
+        "/beautiful-girl-standing-viewpoint-koh-nangyuan-island-near-koh-tao-island-surat-thani-thailand.jpg",
+    },
+  ];
 
   if (router.isFallback) {
     return (
@@ -60,26 +87,49 @@ export default function BlogPage({ blog }) {
           <BlogContentCol>
             <BlogContentTitle>{blog.title}</BlogContentTitle>
             <BlogContentBody>
-              {blog.content || blog.desc || blog.description}
+              It is a long established fact that a reader will be distracted by
+              the readable content of a page when looking at its layout. The
+              point of using Lorem Ipsum is that it has a more-or-less normal
+              distribution of letters, as opposed to using 'Content here,
+              content here', making it look like readable English. Many desktop
+              publishing packages and web page editors now use Lorem Ipsum as
+              their default model text, and a search for 'lorem ipsum' will
+              uncover many web sites still in their infancy. Various versions
+              have evolved over the years, sometimes by accident, sometimes on
+              purpose (injected humour and the like).It is a long established
+              fact that a reader will be distracted by the readable content of a
+              page when looking at its layout. The point of using Lorem Ipsum is
+              that it has a more-or-less normal distribution of letters, as
+              opposed to using 'Content here, content here', making it look like
+              readable English. Many desktop publishing packages and web page
+              editors now use Lorem Ipsum as their default model text, and a
+              search for 'lorem ipsum' will uncover many web sites still in
+              their infancy. Various versions have evolved over the years,
+              sometimes by accident, sometimes on purpose (injected humour and
+              the like).
+              {/* {blog.content || blog.desc || blog.description} */}
             </BlogContentBody>
           </BlogContentCol>
+          <Divider
+            direction="vertical"
+            height="auto"
+            width="1px"
+            color="#AFAFAF"
+            margin="0 5%"
+            style={{ minHeight: "200px" }}
+          />
           <BlogSidebar>
             <BlogSidebarTitle>Most Popular</BlogSidebarTitle>
-            <BlogSidebarCard bg="/woman-hand-holding-camera-standing-top-rock-nature-travel-concept.jpg">
-              <BlogSidebarCardInfo>
-                Travel Tips - How I Plan My Trips
-              </BlogSidebarCardInfo>
-            </BlogSidebarCard>
-            <BlogSidebarCard bg="/boatman-punting-boat-river-arashiyama-autumn-season-along-river-kyoto-japan.jpg">
-              <BlogSidebarCardInfo>
-                Travel Tips - How I Plan My Trips
-              </BlogSidebarCardInfo>
-            </BlogSidebarCard>
-            <BlogSidebarCard bg="/beautiful-girl-standing-viewpoint-koh-nangyuan-island-near-koh-tao-island-surat-thani-thailand.jpg">
-              <BlogSidebarCardInfo>
-                Travel Tips - How I Plan My Trips
-              </BlogSidebarCardInfo>
-            </BlogSidebarCard>
+            <Divider
+              direction="horizontal"
+              width="120px"
+              height="0px"
+              color="#AFAFAF"
+              margin="0 auto"
+            />
+            {popularBlogs.map((b) => (
+              <BlogCard key={b.id} blog={b} image={b.image} />
+            ))}
           </BlogSidebar>
         </BlogMainWrapper>
       </BlogMainSection>

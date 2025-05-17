@@ -88,6 +88,7 @@ export const BlogBrand = styled.div`
 `;
 
 export const BlogMainSection = styled.section`
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   gap: 1.5rem;
@@ -112,10 +113,9 @@ export const BlogMainWrapper = styled.div`
   max-width: 100vw;
   display: flex;
   flex-direction: row;
-  gap: 4.2%;
   align-items: flex-start;
   justify-content: center;
-  padding: 0 2%;
+  padding: 0 9%;
   @media (max-width: 1200px) {
     flex-direction: column;
     gap: 2rem;
@@ -124,8 +124,7 @@ export const BlogMainWrapper = styled.div`
 `;
 
 export const BlogContentCol = styled.div`
-  flex: 1;
-  max-width: 50.8vw; /* 878/1728 */
+  width: 65%;
   display: flex;
   flex-direction: column;
   gap: 3.5rem;
@@ -160,11 +159,10 @@ export const BlogContentBody = styled.div`
 `;
 
 export const BlogSidebar = styled.aside`
-  width: 26.7vw; /* 461/1728 */
-  min-width: 300px;
+  width: 30%;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 2rem;
   align-items: center;
   @media (max-width: 1200px) {
     width: 100%;

@@ -6,7 +6,7 @@ export const MainSection = styled.section`
   opacity: 1;
   border-radius: 48px 48px 0 0;
   padding: 2rem 2rem 2rem 2rem;
-  min-height: 100vh; // changed from 60vh
+  min-height: 100vh; 
 
   @media (max-width: 900px) {
     border-radius: 24px 24px 0 0;
@@ -22,6 +22,13 @@ export const BlogGrid = styled.div`
 
   @media (max-width: 1200px) {
     gap: 1rem;
+  }
+`;
+export const BlogCardContainer = styled.div`
+  display: flex;
+  width: 30%;
+  @media (max-width: 440px) {
+    width: 100%;
   }
 `;
 

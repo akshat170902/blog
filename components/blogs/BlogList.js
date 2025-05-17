@@ -1,5 +1,10 @@
 import BlogCard from "./BlogCard";
-import { MainSection, BlogGrid, ShowMoreBtn } from "./BlogList.styled";
+import {
+  MainSection,
+  BlogGrid,
+  ShowMoreBtn,
+  BlogCardContainer,
+} from "./BlogList.styled";
 
 function getCardImage(blog, idx) {
   if (blog.image) return blog.image;
@@ -20,12 +25,13 @@ export default function BlogList({ blogs }) {
       <BlogGrid>
         {blogs && blogs.length > 0 ? (
           blogs.map((blog, idx) => (
-            
-            <BlogCard
-              key={blog.id}
-              blog={blog}
-              image={getCardImage(blog, idx)}
-            />
+            <BlogCardContainer key={blog.id}>
+              <BlogCard
+                key={blog.id}
+                blog={blog}
+                image={getCardImage(blog, idx)}
+              />
+            </BlogCardContainer>
           ))
         ) : (
           <div>No blogs found.</div>
