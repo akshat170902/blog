@@ -12,6 +12,84 @@ import {
 } from "../../components/blogs/BlogPage.styled";
 import Divider from "../../components/blogs/Divider";
 import Image from "next/image";
+import React, { useMemo } from "react";
+
+// ImageSlider component for blog images
+function ImageSlider({ images }) {
+  const [current, setCurrent] = React.useState(0);
+  const total = images.length;
+  const prev = () => setCurrent((c) => (c - 1 + total) % total);
+  const next = () => setCurrent((c) => (c + 1) % total);
+
+  if (!Array.isArray(images) || total === 0) return null;
+
+  return (
+    <div style={{ width: "100%", position: "relative", aspectRatio: 3 }}>
+      <Image
+        src={images[current]}
+        alt={`blog-image-${current}`}
+        width={100}
+        height={100}
+        style={{ width: "100%", height: "100%" }}
+      />
+      {total > 1 && (
+        <>
+          <button
+            onClick={prev}
+            style={{
+              position: "absolute",
+              left: 10,
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "rgba(255,255,255,0.7)",
+              border: "none",
+              borderRadius: "50%",
+              width: 32,
+              height: 32,
+              cursor: "pointer",
+            }}
+            aria-label="Previous image"
+          >
+            &#8592;
+          </button>
+          <button
+            onClick={next}
+            style={{
+              position: "absolute",
+              right: 10,
+              top: "50%",
+              transform: "translateY(-50%)",
+              background: "rgba(255,255,255,0.7)",
+              border: "none",
+              borderRadius: "50%",
+              width: 32,
+              height: 32,
+              cursor: "pointer",
+            }}
+            aria-label="Next image"
+          >
+            &#8594;
+          </button>
+          <div
+            style={{
+              position: "absolute",
+              bottom: 10,
+              left: "50%",
+              transform: "translateX(-50%)",
+              background: "rgba(0,0,0,0.4)",
+              color: "#fff",
+              borderRadius: 8,
+              padding: "2px 8px",
+              fontSize: 12,
+            }}
+          >
+            {current + 1} / {total}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
 
 export async function getServerSideProps({ params }) {
   const res = await fetch(
@@ -24,32 +102,35 @@ export async function getServerSideProps({ params }) {
 export default function BlogPage({ blog }) {
   const router = useRouter();
 
-  const popularBlogs = [
-    {
-      id: "popular-1",
-      title: "Travel Tips - How I Plan My Trips",
-      author: "Bhawna Sharma",
-      desc: "A slow journey through Himachal’s tea stalls and trails.",
-      image:
-        "/woman-hand-holding-camera-standing-top-rock-nature-travel-concept.jpg",
-    },
-    {
-      id: "popular-2",
-      title: "Boatman Punting in Kyoto",
-      author: "Akshat",
-      desc: "Experience the autumn season along the river in Kyoto, Japan.",
-      image:
-        "/boatman-punting-boat-river-arashiyama-autumn-season-along-river-kyoto-japan.jpg",
-    },
-    {
-      id: "popular-3",
-      title: "Viewpoint at Koh Nangyuan",
-      author: "Bhawna Sharma",
-      desc: "Beautiful girl standing at the viewpoint, Koh Nangyuan Island.",
-      image:
-        "/beautiful-girl-standing-viewpoint-koh-nangyuan-island-near-koh-tao-island-surat-thani-thailand.jpg",
-    },
-  ];
+  const popularBlogs = useMemo(
+    () => [
+      {
+        id: "popular-1",
+        title: "Travel Tips - How I Plan My Trips",
+        author: "Bhawna Sharma",
+        desc: "A slow journey through Himachal’s tea stalls and trails.",
+        image:
+          "/woman-hand-holding-camera-standing-top-rock-nature-travel-concept.jpg",
+      },
+      {
+        id: "popular-2",
+        title: "Boatman Punting in Kyoto",
+        author: "Akshat",
+        desc: "Experience the autumn season along the river in Kyoto, Japan.",
+        image:
+          "/boatman-punting-boat-river-arashiyama-autumn-season-along-river-kyoto-japan.jpg",
+      },
+      {
+        id: "popular-3",
+        title: "Viewpoint at Koh Nangyuan",
+        author: "Bhawna Sharma",
+        desc: "Beautiful girl standing at the viewpoint, Koh Nangyuan Island.",
+        image:
+          "/beautiful-girl-standing-viewpoint-koh-nangyuan-island-near-koh-tao-island-surat-thani-thailand.jpg",
+      },
+    ],
+    []
+  );
 
   if (router.isFallback) {
     return (
@@ -88,6 +169,7 @@ export default function BlogPage({ blog }) {
           <BlogContentCol>
             <BlogContentTitle>{blog.hero?.h1 || blog.title}</BlogContentTitle>
             <BlogContentBody>
+              {/* Placeholder/fallback content */}
               It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The
               point of using Lorem Ipsum is that it has a more-or-less normal
@@ -97,18 +179,7 @@ export default function BlogPage({ blog }) {
               their default model text, and a search for 'lorem ipsum' will
               uncover many web sites still in their infancy. Various versions
               have evolved over the years, sometimes by accident, sometimes on
-              purpose (injected humour and the like).It is a long established
-              fact that a reader will be distracted by the readable content of a
-              page when looking at its layout. The point of using Lorem Ipsum is
-              that it has a more-or-less normal distribution of letters, as
-              opposed to using 'Content here, content here', making it look like
-              readable English. Many desktop publishing packages and web page
-              editors now use Lorem Ipsum as their default model text, and a
-              search for 'lorem ipsum&apos; will uncover many web sites still in
-              their infancy. Various versions have evolved over the years,
-              sometimes by accident, sometimes on purpose (injected humour and
-              the like).(injected humour and the like).(injected humour and
-              {/* {blog.content || blog.hero.description || blog.hero.description} */}
+              purpose (injected humour and the like).
             </BlogContentBody>
           </BlogContentCol>
           <Divider
@@ -134,7 +205,6 @@ export default function BlogPage({ blog }) {
           </BlogSidebar>
         </BlogMainWrapper>
 
-        {/* {blog?.sections?.map((section, index) => ( */}
         <div>
           <BlogContentTitle>{blog.h1 || "Why do we use it?"}</BlogContentTitle>
           <BlogContentBody>
@@ -153,21 +223,22 @@ export default function BlogPage({ blog }) {
               width: "100%",
               display: "flex",
               alignItems: "center",
+              position: "relative",
             }}
           >
-            {/* {blog?.images?.map((img, idx) => ( */}
-            <Image
-              // key={idx}
-              src=""
-              alt="hi"
-              width={100}
-              height={100}
-              style={{ width: "100%", height: "100%" }}
-            />
-            {/* ))} */}
+            {Array.isArray(blog?.images) && blog.images.length > 0 ? (
+              <ImageSlider images={blog.images} />
+            ) : (
+              <Image
+                src=""
+                alt="hi"
+                width={100}
+                height={100}
+                style={{ width: "100%", height: "100%" }}
+              />
+            )}
           </div>
         </div>
-        {/* ))} */}
       </BlogMainSection>
     </>
   );
