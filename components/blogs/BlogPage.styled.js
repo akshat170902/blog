@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const BlogHero = styled.section`
   position: relative;
   width: 100vw;
-  height: 52.08vw; /* 900px/1728px = 52.08vw for aspect ratio */
+  height: 52.08vw;
   max-height: 56vh;
   min-height: 400px;
   display: flex;
@@ -28,7 +28,7 @@ export const BlogHeroOverlay = styled.div`
   top: 0;
   width: 100vw;
   height: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   z-index: 2;
 `;
 
@@ -88,15 +88,23 @@ export const BlogBrand = styled.div`
 `;
 
 export const BlogMainSection = styled.section`
-  position: relative;
-  width: 100vw;
-  background: #fff;
-  border-radius: 9% 9% 0 0 / 16% 16% 0 0;
-  margin-top: -8%;
-  min-height: 60vh;
-  padding: 7% 0 4% 0;
   display: flex;
   justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  background: #fff;
+  border-radius: 48px 48px 0 0;
+  margin-top: -48px;
+  padding-top: 5%;
+
+  position: relative;
+  z-index: 2;
+  @media (max-width: 900px) {
+    border-radius: 24px 24px 0 0;
+    padding-top: 1rem;
+    margin-top: -24px;
+  }
 `;
 
 export const BlogMainWrapper = styled.div`
@@ -186,8 +194,7 @@ export const BlogSidebarCard = styled.div`
   height: 12.7vw; /* 220/1728 */
   min-height: 120px;
   border-radius: 0.8rem;
-  background: ${({ bg }) =>
-    `url(${bg}) center/cover no-repeat`};
+  background: ${({ bg }) => `url(${bg}) center/cover no-repeat`};
   position: relative;
   margin-bottom: 1.5rem;
   display: flex;
@@ -202,7 +209,7 @@ export const BlogSidebarCard = styled.div`
 
 export const BlogSidebarCardInfo = styled.div`
   width: 100%;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   color: #fff;
   font-family: "Montserrat", sans-serif;
   font-weight: 500;

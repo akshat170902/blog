@@ -1,12 +1,6 @@
 import { useRouter } from "next/router";
+import BlogHero from "../../components/blogs/BlogHero";
 import {
-  BlogHero,
-  BlogHeroImage,
-  BlogHeroOverlay,
-  BlogHeroContent,
-  BlogHeroTitle,
-  BlogHeroMeta,
-  BlogBrand,
   BlogMainSection,
   BlogMainWrapper,
   BlogContentCol,
@@ -31,46 +25,36 @@ export default function BlogPage({ blog }) {
 
   if (router.isFallback) {
     return (
-      <BlogHero>
-        <BlogHeroOverlay />
-        <BlogHeroContent>
-          <BlogHeroTitle>Loading...</BlogHeroTitle>
-        </BlogHeroContent>
-      </BlogHero>
+      <BlogHero
+        title="Loading..."
+        subtitle=""
+        brand="Travmigoz"
+        scrollAnimate={true}
+      />
     );
   }
 
   if (!blog || blog?.message === "Not found") {
     return (
-      <BlogHero>
-        <BlogHeroOverlay />
-        <BlogHeroContent>
-          <BlogHeroTitle>Blog not found.</BlogHeroTitle>
-        </BlogHeroContent>
-      </BlogHero>
+      <BlogHero
+        title="Blog not found."
+        subtitle=""
+        brand="Travmigoz"
+        scrollAnimate={true}
+      />
     );
   }
 
   return (
     <>
-      <BlogHero>
-        <BlogHeroImage
-          src={
-            blog.image ||
-            "/backpacker-explores-intricate-alleyways-jodhpur39s-blue-city-india-experiencing-vibrant-colors-cultural-richness.jpg"
-          }
-          alt={blog.title}
-        />
-        <BlogHeroOverlay />
-        <BlogBrand>Travmigoz</BlogBrand>
-        <BlogHeroContent>
-          <BlogHeroTitle>{blog.title}</BlogHeroTitle>
-          <BlogHeroMeta>
-            By {blog.author || "Unknown"}
-            {blog.date && ` | ${new Date(blog.date).toLocaleDateString()}`}
-          </BlogHeroMeta>
-        </BlogHeroContent>
-      </BlogHero>
+      <BlogHero
+        title={blog.title}
+        subtitle={`By ${blog.author || "Unknown"}${
+          blog.date ? ` | ${new Date(blog.date).toLocaleDateString()}` : ""
+        }`}
+        brand="Travmigoz"
+        scrollAnimate={true}
+      />
       <BlogMainSection>
         <BlogMainWrapper>
           <BlogContentCol>
