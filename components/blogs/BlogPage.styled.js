@@ -101,6 +101,8 @@ export const BlogMainSection = styled.section`
 
   position: relative;
   z-index: 2;
+  
+  padding: 5% 9%;
   @media (max-width: 900px) {
     border-radius: 24px 24px 0 0;
     padding-top: 1rem;
@@ -115,7 +117,6 @@ export const BlogMainWrapper = styled.div`
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  padding: 0 9%;
   @media (max-width: 1200px) {
     flex-direction: column;
     gap: 2rem;

@@ -11,6 +11,7 @@ import {
   BlogSidebarTitle,
 } from "../../components/blogs/BlogPage.styled";
 import Divider from "../../components/blogs/Divider";
+import Image from "next/image";
 
 export async function getServerSideProps({ params }) {
   const res = await fetch(
@@ -75,7 +76,7 @@ export default function BlogPage({ blog }) {
   return (
     <>
       <BlogHero
-        title={blog.title}
+        title={blog?.seo?.title}
         subtitle={`By ${blog.author || "Unknown"}${
           blog.date ? ` | ${new Date(blog.date).toLocaleDateString()}` : ""
         }`}
@@ -85,7 +86,7 @@ export default function BlogPage({ blog }) {
       <BlogMainSection>
         <BlogMainWrapper>
           <BlogContentCol>
-            <BlogContentTitle>{blog.title}</BlogContentTitle>
+            <BlogContentTitle>{blog.hero?.h1 || blog.title}</BlogContentTitle>
             <BlogContentBody>
               It is a long established fact that a reader will be distracted by
               the readable content of a page when looking at its layout. The
@@ -103,11 +104,11 @@ export default function BlogPage({ blog }) {
               opposed to using 'Content here, content here', making it look like
               readable English. Many desktop publishing packages and web page
               editors now use Lorem Ipsum as their default model text, and a
-              search for 'lorem ipsum' will uncover many web sites still in
+              search for 'lorem ipsum&apos; will uncover many web sites still in
               their infancy. Various versions have evolved over the years,
               sometimes by accident, sometimes on purpose (injected humour and
               the like).(injected humour and the like).(injected humour and
-              {/* {blog.content || blog.desc || blog.description} */}
+              {/* {blog.content || blog.hero.description || blog.hero.description} */}
             </BlogContentBody>
           </BlogContentCol>
           <Divider
@@ -133,14 +134,40 @@ export default function BlogPage({ blog }) {
           </BlogSidebar>
         </BlogMainWrapper>
 
-        {blog?.sections?.map((section, index) => (
-          <div key={index}>
-            <BlogContentTitle>{section.title}</BlogContentTitle>
-            <BlogContentBody>
-              {section.content || section.desc || section.description}
-            </BlogContentBody>
+        {/* {blog?.sections?.map((section, index) => ( */}
+        <div>
+          <BlogContentTitle>{blog.h1 || "Why do we use it?"}</BlogContentTitle>
+          <BlogContentBody>
+            <div
+              dangerouslySetInnerHTML={{
+                __html:
+                  blog?.content ||
+                  "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+              }}
+            />
+          </BlogContentBody>
+          <div
+            style={{
+              color: "transparent",
+              aspectRatio: 3,
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {/* {blog?.images?.map((img, idx) => ( */}
+            <Image
+              // key={idx}
+              src=""
+              alt="hi"
+              width={100}
+              height={100}
+              style={{ width: "100%", height: "100%" }}
+            />
+            {/* ))} */}
           </div>
-        ))}
+        </div>
+        {/* ))} */}
       </BlogMainSection>
     </>
   );
