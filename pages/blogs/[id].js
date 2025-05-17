@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Head from "next/head";
 import BlogHero from "../../components/blogs/BlogHero";
 import BlogCard from "../../components/blogs/BlogCard";
 import {
@@ -156,6 +157,13 @@ export default function BlogPage({ blog }) {
 
   return (
     <>
+      <Head>
+        <title>{blog?.seo?.title || "Blog"}</title>
+        <meta
+          name="description"
+          content={blog?.seo?.description || "Travmigoz Blog"}
+        />
+      </Head>
       <BlogHero
         title={blog?.seo?.title}
         subtitle={`By ${blog.author || "Unknown"}${
