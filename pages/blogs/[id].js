@@ -106,7 +106,7 @@ export default function BlogPage({ blog }) {
               search for 'lorem ipsum' will uncover many web sites still in
               their infancy. Various versions have evolved over the years,
               sometimes by accident, sometimes on purpose (injected humour and
-              the like).
+              the like).(injected humour and the like).(injected humour and
               {/* {blog.content || blog.desc || blog.description} */}
             </BlogContentBody>
           </BlogContentCol>
@@ -132,6 +132,15 @@ export default function BlogPage({ blog }) {
             ))}
           </BlogSidebar>
         </BlogMainWrapper>
+
+        {blog?.sections?.map((section, index) => (
+          <div key={index}>
+            <BlogContentTitle>{section.title}</BlogContentTitle>
+            <BlogContentBody>
+              {section.content || section.desc || section.description}
+            </BlogContentBody>
+          </div>
+        ))}
       </BlogMainSection>
     </>
   );
