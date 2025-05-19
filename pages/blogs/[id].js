@@ -31,7 +31,13 @@ function ImageSlider({ images }) {
         alt={`blog-image-${current}`}
         width={100}
         height={100}
-        style={{ width: "100%", height: "100%" }}
+        style={{
+          borderRadius: 24,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "center",
+        }}
       />
       {total > 1 && (
         <>
@@ -39,14 +45,14 @@ function ImageSlider({ images }) {
             onClick={prev}
             style={{
               position: "absolute",
-              left: 10,
+              left: "-5%",
               top: "50%",
               transform: "translateY(-50%)",
               background: "rgba(255,255,255,0.7)",
               border: "none",
               borderRadius: "50%",
-              width: 32,
-              height: 32,
+              width: "5%",
+              height: "5%",
               cursor: "pointer",
             }}
             aria-label="Previous image"
@@ -57,14 +63,14 @@ function ImageSlider({ images }) {
             onClick={next}
             style={{
               position: "absolute",
-              right: 10,
+              right: "-5%",
               top: "50%",
               transform: "translateY(-50%)",
               background: "rgba(255,255,255,0.7)",
               border: "none",
               borderRadius: "50%",
-              width: 32,
-              height: 32,
+              width: "5%",
+              height: "5%",
               cursor: "pointer",
             }}
             aria-label="Next image"
@@ -141,12 +147,16 @@ export default function BlogPage({ blog, popularBlogs }) {
       </Head>
       <BlogHero
         title={blog?.seo?.title}
-        subtitle={`By ${blog.author || "Unknown"}${
-          blog.date ? ` | ${new Date(blog.date).toLocaleDateString()}` : ""
+        subtitle={`By ${blog.author || "Akshat Garg"} ${
+          blog.updatedAt
+            ? ` | Updated On ${new Date(blog.updatedAt).toLocaleDateString(
+                "en-US"
+              )}`
+            : ""
         }`}
-        brand="Travmigoz"
+        brand="Akshat"
         scrollAnimate={true}
-        image={blog?.hero?.image}
+        image={blog?.blogImage}
         imageAlt={blog?.hero?.imageAlt || blog?.seo?.title || "Blog Hero Image"}
       />
       <BlogMainSection>
@@ -175,14 +185,14 @@ export default function BlogPage({ blog, popularBlogs }) {
               margin="0 auto"
             />
             {popularBlogs.map((b) => (
-              <BlogCard key={b._id || b.id} blog={b} image={b.image} />
+              <BlogCard key={b._id || b.id} blog={b} image={b.blogImage} />
             ))}
           </BlogSidebar>
         </BlogMainWrapper>
 
         <SectionContainer>
           {blog?.sections?.map((section, index) => (
-            <React.Fragment key={index}>
+            <SectionContainer key={index}>
               <BlogContentTitle>
                 {section.h1 || "Why do we use it?"}
               </BlogContentTitle>
@@ -211,7 +221,7 @@ export default function BlogPage({ blog, popularBlogs }) {
                   <></>
                 )}
               </div>
-            </React.Fragment>
+            </SectionContainer>
           ))}
         </SectionContainer>
       </BlogMainSection>

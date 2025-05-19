@@ -101,7 +101,7 @@ export const BlogMainSection = styled.section`
 
   position: relative;
   z-index: 2;
-  
+
   padding: 5% 9%;
   @media (max-width: 900px) {
     border-radius: 24px 24px 0 0;
@@ -146,11 +146,12 @@ export const BlogContentTitle = styled.h2`
   }
 `;
 export const SectionContainer = styled.div`
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-justify-content: flex-start;
-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 2% 0;
   @media (max-width: 900px) {
   }
 `;

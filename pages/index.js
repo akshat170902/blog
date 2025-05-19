@@ -123,7 +123,7 @@ export default function BlogHome() {
                     >
                       Status: {blog.status || "draft"} | Created:{" "}
                       {blog.createdAt &&
-                        new Date(blog.createdAt).toLocaleDateString()}
+                        new Date(blog.createdAt).toLocaleDateString("en-US")}
                     </div>
                   </li>
                 ))}

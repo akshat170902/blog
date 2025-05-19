@@ -14,7 +14,7 @@ export default function BlogHero({
   subtitle = "The best part of traveling isn’t the destination, it’s the people you meet along the way.",
   brand = "Akshat",
   scrollAnimate = true,
-  image = "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fHRyaXZlbGluZ3xlbnwwfHx8fDE2OTI5NTY1MjM&ixlib=rb-4.0.3&q=80&w=1080",
+  image = "",
   imageAlt = "Blog Hero Image",
 }) {
   const wrapperRef = useRef(null);

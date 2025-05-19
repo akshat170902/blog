@@ -153,7 +153,7 @@ export const CardCTA = styled(Link)`
   align-items: center;
   padding: 2% 5%;
   gap: 2%;
-  margin-top: 0.5rem;
+      margin: auto 0;
   border: 1px solid #fafafa;
   border-radius: 40px;
   font-family: "Montserrat", sans-serif;
