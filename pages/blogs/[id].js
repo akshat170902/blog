@@ -14,7 +14,7 @@ import {
 } from "../../components/blogs/BlogPage.styled";
 import Divider from "../../components/blogs/Divider";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 function ImageSlider({ images }) {
   const [current, setCurrent] = React.useState(0);
@@ -98,6 +98,41 @@ function ImageSlider({ images }) {
   );
 }
 
+// Horizontal scrollable popular blogs component
+function PopularBlogsHorizontalScroll({ blogs }) {
+  return (
+    <div
+      style={{
+        overflowX: "auto",
+        display: "flex",
+        gap: "2rem",
+        padding: "2rem 0",
+        margin: "0 -2rem",
+      }}
+    >
+      {blogs.map((b, idx) => (
+        <div
+          key={b._id || b.id || idx}
+          style={{
+            flex: "0 0 30%",
+            maxWidth: "30%",
+            minWidth: "280px",
+            aspectRatio: 4 / 3,
+            background: "#f8f8f8",
+            borderRadius: 24,
+            margin: "0 1rem",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+          }}
+        >
+          <BlogCard blog={b} image={b.blogImage} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export async function getServerSideProps({ params }) {
   const res = await fetch(`http://localhost:4000/blogs/${params.id}`);
   const blog = await res.json();
@@ -113,6 +148,7 @@ export async function getServerSideProps({ params }) {
 
 export default function BlogPage({ blog, popularBlogs }) {
   const router = useRouter();
+  const [showAllSections, setShowAllSections] = useState(false);
 
   if (router.isFallback) {
     return (
@@ -191,7 +227,10 @@ export default function BlogPage({ blog, popularBlogs }) {
         </BlogMainWrapper>
 
         <SectionContainer>
-          {blog?.sections?.map((section, index) => (
+          {(showAllSections
+            ? blog?.sections
+            : blog?.sections?.slice(0, 2)
+          )?.map((section, index) => (
             <SectionContainer key={index}>
               <BlogContentTitle>
                 {section.h1 || "Why do we use it?"}
@@ -223,7 +262,43 @@ export default function BlogPage({ blog, popularBlogs }) {
               </div>
             </SectionContainer>
           ))}
+          {!showAllSections &&
+            Array.isArray(blog?.sections) &&
+            blog.sections.length > 2 && (
+              <div
+                style={{ width: "100%", textAlign: "center", margin: "2rem 0" }}
+              >
+                <button
+                  onClick={() => setShowAllSections(true)}
+                  style={{
+                    padding: "0.8rem 2.5rem",
+                    fontSize: "1.2rem",
+                    borderRadius: "24px",
+                    background: "#8dd3bb",
+                    color: "#222",
+                    border: "none",
+                    cursor: "pointer",
+                    fontWeight: 600,
+                    boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
+                  }}
+                >
+                  Show More
+                </button>
+              </div>
+            )}
         </SectionContainer>
+        <Divider
+          direction="horizontal"
+          width="120px"
+          height="0px"
+          color="#AFAFAF"
+          margin="0 auto"
+        />
+
+        {/* Horizontal scrollable popular blogs */}
+        {Array.isArray(popularBlogs) && popularBlogs.length > 0 && (
+          <PopularBlogsHorizontalScroll blogs={popularBlogs} />
+        )}
       </BlogMainSection>
     </>
   );
