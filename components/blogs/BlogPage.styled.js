@@ -145,6 +145,15 @@ export const BlogContentTitle = styled.h2`
     font-size: 2rem;
   }
 `;
+export const SectionContainer = styled.div`
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+justify-content: flex-start;
+width: 100%;
+  @media (max-width: 900px) {
+  }
+`;
 
 export const BlogContentBody = styled.div`
   font-family: "Montserrat", sans-serif;

@@ -7,7 +7,7 @@ import {
 } from "./BlogList.styled";
 
 function getCardImage(blog, idx) {
-  if (blog.image) return blog.image;
+  if (blog.blogImage) return blog.blogImage;
   const fallback = [
     "/woman-hand-holding-camera-standing-top-rock-nature-travel-concept.jpg",
     "/backpacker-explores-intricate-alleyways-jodhpur39s-blue-city-india-experiencing-vibrant-colors-cultural-richness.jpg",

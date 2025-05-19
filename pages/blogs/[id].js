@@ -10,12 +10,12 @@ import {
   BlogContentBody,
   BlogSidebar,
   BlogSidebarTitle,
+  SectionContainer,
 } from "../../components/blogs/BlogPage.styled";
 import Divider from "../../components/blogs/Divider";
 import Image from "next/image";
-import React, { useMemo } from "react";
+import React from "react";
 
-// ImageSlider component for blog images
 function ImageSlider({ images }) {
   const [current, setCurrent] = React.useState(0);
   const total = images.length;
@@ -93,45 +93,20 @@ function ImageSlider({ images }) {
 }
 
 export async function getServerSideProps({ params }) {
-  const res = await fetch(
-    `https://680cbd742ea307e081d4e50f.mockapi.io/blogs/getBlogById/${params.id}`
-  );
+  const res = await fetch(`http://localhost:4000/blogs/${params.id}`);
   const blog = await res.json();
-  return { props: { blog } };
+
+  const resPopular = await fetch("http://localhost:4000/blogs");
+  const allBlogs = await resPopular.json();
+
+  const blogArray = Array.isArray(allBlogs.data) ? allBlogs.data : [];
+  const popularBlogs = blogArray.slice(0, 3);
+
+  return { props: { blog, popularBlogs } };
 }
 
-export default function BlogPage({ blog }) {
+export default function BlogPage({ blog, popularBlogs }) {
   const router = useRouter();
-
-  const popularBlogs = useMemo(
-    () => [
-      {
-        id: "popular-1",
-        title: "Travel Tips - How I Plan My Trips",
-        author: "Bhawna Sharma",
-        desc: "A slow journey through Himachal’s tea stalls and trails.",
-        image:
-          "/woman-hand-holding-camera-standing-top-rock-nature-travel-concept.jpg",
-      },
-      {
-        id: "popular-2",
-        title: "Boatman Punting in Kyoto",
-        author: "Akshat",
-        desc: "Experience the autumn season along the river in Kyoto, Japan.",
-        image:
-          "/boatman-punting-boat-river-arashiyama-autumn-season-along-river-kyoto-japan.jpg",
-      },
-      {
-        id: "popular-3",
-        title: "Viewpoint at Koh Nangyuan",
-        author: "Bhawna Sharma",
-        desc: "Beautiful girl standing at the viewpoint, Koh Nangyuan Island.",
-        image:
-          "/beautiful-girl-standing-viewpoint-koh-nangyuan-island-near-koh-tao-island-surat-thani-thailand.jpg",
-      },
-    ],
-    []
-  );
 
   if (router.isFallback) {
     return (
@@ -171,23 +146,15 @@ export default function BlogPage({ blog }) {
         }`}
         brand="Travmigoz"
         scrollAnimate={true}
+        image={blog?.hero?.image}
+        imageAlt={blog?.hero?.imageAlt || blog?.seo?.title || "Blog Hero Image"}
       />
       <BlogMainSection>
         <BlogMainWrapper>
           <BlogContentCol>
             <BlogContentTitle>{blog.hero?.h1 || blog.title}</BlogContentTitle>
             <BlogContentBody>
-              {/* Placeholder/fallback content */}
-              It is a long established fact that a reader will be distracted by
-              the readable content of a page when looking at its layout. The
-              point of using Lorem Ipsum is that it has a more-or-less normal
-              distribution of letters, as opposed to using 'Content here,
-              content here', making it look like readable English. Many desktop
-              publishing packages and web page editors now use Lorem Ipsum as
-              their default model text, and a search for 'lorem ipsum' will
-              uncover many web sites still in their infancy. Various versions
-              have evolved over the years, sometimes by accident, sometimes on
-              purpose (injected humour and the like).
+              {blog.hero?.description || blog.desc}
             </BlogContentBody>
           </BlogContentCol>
           <Divider
@@ -208,45 +175,45 @@ export default function BlogPage({ blog }) {
               margin="0 auto"
             />
             {popularBlogs.map((b) => (
-              <BlogCard key={b.id} blog={b} image={b.image} />
+              <BlogCard key={b._id || b.id} blog={b} image={b.image} />
             ))}
           </BlogSidebar>
         </BlogMainWrapper>
 
-        <div>
-          <BlogContentTitle>{blog.h1 || "Why do we use it?"}</BlogContentTitle>
-          <BlogContentBody>
-            <div
-              dangerouslySetInnerHTML={{
-                __html:
-                  blog?.content ||
-                  "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
-              }}
-            />
-          </BlogContentBody>
-          <div
-            style={{
-              color: "transparent",
-              aspectRatio: 3,
-              width: "100%",
-              display: "flex",
-              alignItems: "center",
-              position: "relative",
-            }}
-          >
-            {Array.isArray(blog?.images) && blog.images.length > 0 ? (
-              <ImageSlider images={blog.images} />
-            ) : (
-              <Image
-                src=""
-                alt="hi"
-                width={100}
-                height={100}
-                style={{ width: "100%", height: "100%" }}
-              />
-            )}
-          </div>
-        </div>
+        <SectionContainer>
+          {blog?.sections?.map((section, index) => (
+            <React.Fragment key={index}>
+              <BlogContentTitle>
+                {section.h1 || "Why do we use it?"}
+              </BlogContentTitle>
+              <BlogContentBody>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      section.content ||
+                      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+                  }}
+                />
+              </BlogContentBody>
+              <div
+                style={{
+                  color: "transparent",
+                  aspectRatio: 3,
+                  width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  position: "relative",
+                }}
+              >
+                {Array.isArray(section?.images) && section.images.length > 0 ? (
+                  <ImageSlider images={section.images} />
+                ) : (
+                  <></>
+                )}
+              </div>
+            </React.Fragment>
+          ))}
+        </SectionContainer>
       </BlogMainSection>
     </>
   );

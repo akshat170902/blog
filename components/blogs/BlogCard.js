@@ -14,19 +14,19 @@ export default function BlogCard({ blog, image }) {
   return (
     <BlogCardBox image={blog.avatar || image}>
       <CardOverlay />
-      <CardCategory>{blog.title}</CardCategory>
+      <CardCategory>{blog.seo.title}</CardCategory>
       <CardContent>
         <CardMeta>
           <CardContentBox>
-            <CardAuthor>By {blog.author || "Bhawna Sharma"}</CardAuthor>
+            <CardAuthor>By {blog.author || "Akshat Garg"}</CardAuthor>
             <CardDesc>
               {blog.desc ||
               
-                blog.description ||
+                blog.seo.description ||
                 "A slow journey through Himachal’s tea stalls and trails."}
             </CardDesc>
           </CardContentBox>
-          <CardCTA href={`/blogs/${blog.id}`}>Read</CardCTA>
+          <CardCTA href={`/blogs/${blog._id}`}>Read</CardCTA>
         </CardMeta>
       </CardContent>
     </BlogCardBox>

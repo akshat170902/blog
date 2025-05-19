@@ -4,11 +4,11 @@ import BlogList from "../../components/blogs/BlogList";
 
 export async function getServerSideProps() {
   const res = await fetch(
-    "https://680cbd742ea307e081d4e50f.mockapi.io/blogs/getBlogById"
+    "http://localhost:4000/blogs"
   );
   const blogs = await res.json();
   // Filter for general category if available
-  const filtered = blogs.filter(
+  const filtered = blogs.data.filter(
     (b) => !b.category || b.category.toLowerCase() === "general"
   );
   return { props: { blogs: filtered } };

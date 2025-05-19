@@ -8,8 +8,9 @@ export const HeroSection = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url("/beautiful-shot-udaipur-from-window-city-palace.jpg")
-    center/cover no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   @media (max-width: 900px) {
     height: 300px;
     min-height: 300px;

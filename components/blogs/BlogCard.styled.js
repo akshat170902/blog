@@ -6,8 +6,8 @@ export const CardMeta = styled.div`
   max-height: 0;
   overflow: hidden;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: space-between;
+  justify-content: space-between;
   pointer-events: none;
   transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
