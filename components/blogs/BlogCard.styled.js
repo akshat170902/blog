@@ -43,7 +43,6 @@ export const BlogCardBox = styled.div`
   @media (max-width: 900px) {
     width: 100%;
     max-width: 400px;
-    height: 220px;
   }
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);

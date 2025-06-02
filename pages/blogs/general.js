@@ -7,7 +7,6 @@ export async function getServerSideProps() {
     "http://localhost:4000/blogs"
   );
   const blogs = await res.json();
-  // Filter for general category if available
   const filtered = blogs.data.filter(
     (b) => !b.category || b.category.toLowerCase() === "general"
   );
